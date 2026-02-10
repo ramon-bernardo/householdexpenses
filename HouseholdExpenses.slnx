@@ -1,0 +1,34 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+  </Configurations>
+  <Folder Name="/Api/">
+    <Project Path="Source/HouseholdExpenses.Api/HouseholdExpenses.Api.csproj">
+      <Platform Project="x64" />
+    </Project>
+  </Folder>
+  <Folder Name="/Application/">
+    <Project Path="Source/HouseholdExpenses.Application/HouseholdExpenses.Application.csproj" Id="b1bcf1be-eeb2-430e-99a3-79fd17c6fa5b">
+      <Platform Project="x64" />
+    </Project>
+  </Folder>
+  <Folder Name="/Domain/">
+    <Project Path="Source/HouseholdExpenses.Domain/HouseholdExpenses.Domain.csproj" Id="8cb1d217-c80d-4efd-93e4-6ab9d97b582a">
+      <Platform Project="x64" />
+    </Project>
+  </Folder>
+  <Folder Name="/Infrastructure/">
+    <Project Path="Source/HouseholdExpenses.Infrastructure/HouseholdExpenses.CrossCutting.IoC/HouseholdExpenses.CrossCutting.IoC.csproj" Id="0ec76599-8c87-4409-ac7b-b70f11226898">
+      <Platform Project="x64" />
+    </Project>
+    <Project Path="Source/HouseholdExpenses.Infrastructure/HouseholdExpenses.Data/HouseholdExpenses.Data.csproj" Id="db941456-2ea8-4168-a91e-24d29f001145">
+      <Platform Project="x64" />
+    </Project>
+  </Folder>
+  <Folder Name="/Presentation/">
+    <Project Path="Source/HouseholdExpenses.Presentation/householdexpenses-web/householdexpenses-web.esproj">
+      <Build />
+      <Deploy />
+    </Project>
+  </Folder>
+</Solution>
