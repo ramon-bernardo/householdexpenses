@@ -1,10 +1,11 @@
-﻿using MediatR;
-using AutoMapper;
+﻿using AutoMapper;
 using HouseholdExpenses.Application.Categories.Repositories;
+using HouseholdExpenses.Application.Common;
 using HouseholdExpenses.Application.People.Repositories;
 using HouseholdExpenses.Application.Transactions.Commands;
 using HouseholdExpenses.Application.Transactions.DTOs;
 using HouseholdExpenses.Application.Transactions.Repositories;
+using HouseholdExpenses.Domain.Common;
 using HouseholdExpenses.Domain.Transactions.Entities;
 
 namespace HouseholdExpenses.Application.Transactions.CommandHandlers;
@@ -14,7 +15,7 @@ public sealed class CreateTransactionCommandHandler(
     ICategoryRepository categoryRepository,
     ITransactionRepository transactionRepository,
     IMapper mapper
-) : IRequestHandler<CreateTransactionCommand, TransactionDTO>
+) : ICommandHandler<CreateTransactionCommand, TransactionDTO>
 {
     private readonly IPersonRepository PersonRepository = personRepository;
     private readonly ICategoryRepository CategoryRepository = categoryRepository;
@@ -26,13 +27,13 @@ public sealed class CreateTransactionCommandHandler(
         var person = await PersonRepository.GetActiveById(request.PersonId);
         if (person is null)
         {
-            throw new Exception("Person not found.");
+            throw new DomainException.NotFound("Person not found.");
         }
 
         var category = await CategoryRepository.GetById(request.CategoryId);
         if (category is null)
         {
-            throw new Exception("Category not found.");
+            throw new DomainException.NotFound("Category not found.");
         }
 
         var transaction = Transaction.Create(

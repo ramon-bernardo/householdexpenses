@@ -14,11 +14,11 @@ public sealed class CategoriesProfile : Profile
 
         CreateMap<Category, CategoryModel>();
         CreateMap<CategoryModel, Category>()
-            .ConstructUsing((model, context) =>
+            .ConstructUsing((src, context) =>
             {
-                var purpose = context.Mapper.Map<CategoryPurpose>(model.Purpose);
+                var purpose = context.Mapper.Map<CategoryPurpose>(src.Purpose);
                 return Category.Create(
-                    model.Description,
+                    src.Description,
                     purpose
                 );
             });

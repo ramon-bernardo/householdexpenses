@@ -1,5 +1,5 @@
-﻿using MediatR;
-using AutoMapper;
+﻿using AutoMapper;
+using HouseholdExpenses.Application.Common;
 using HouseholdExpenses.Application.People.Commands;
 using HouseholdExpenses.Application.People.DTOs;
 using HouseholdExpenses.Application.People.Repositories;
@@ -10,7 +10,7 @@ namespace HouseholdExpenses.Application.People.CommandHandlers;
 public sealed class CreatePersonCommandHandler(
     IPersonRepository personRepository,
     IMapper mapper
-) : IRequestHandler<CreatePersonCommand, PersonDTO>
+) : ICommandHandler<CreatePersonCommand, PersonDTO>
 {
     private readonly IPersonRepository PersonRepository = personRepository;
     private readonly IMapper Mapper = mapper;

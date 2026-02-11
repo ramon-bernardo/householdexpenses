@@ -36,10 +36,6 @@ public sealed class TransactionController(ISender sender) : Controller
     public async Task<IActionResult> GetById(uint id)
     {
         var transaction = await Sender.Send(new GetTransactionByIdQuery(id));
-        if (transaction is null)
-        {
-            return NotFound();
-        }
         return Ok(transaction);
     }
 }

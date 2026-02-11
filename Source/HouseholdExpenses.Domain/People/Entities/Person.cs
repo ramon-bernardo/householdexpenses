@@ -1,10 +1,13 @@
-﻿namespace HouseholdExpenses.Domain.People.Entities;
+﻿using HouseholdExpenses.Domain.Common;
+using HouseholdExpenses.Domain.People.ValueObjects;
+
+namespace HouseholdExpenses.Domain.People.Entities;
 
 public sealed class Person
 {
     public uint Id { get; private set; }
 
-    public string Name { get; private set; }
+    public Name Name { get; private set; }
 
     public uint Age { get; private set; }
 
@@ -15,7 +18,7 @@ public sealed class Person
     private Person() { }
 #pragma warning restore CS8618
 
-    private Person(string name, uint age)
+    private Person(Name name, uint age)
     {
         Name = name;
         Age = age;
@@ -24,37 +27,19 @@ public sealed class Person
 
     public static Person Create(string name, uint age)
     {
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new Exception("Name is required."); // DomainException
-        }
+        var nameObject = Name.Create(name);
 
-        if (name.Length > 200)
-        {
-            throw new Exception("Name max length is 200.");
-        }
-
-        return new Person(name, age);
+        return new Person(nameObject, age);
     }
 
     public void Update(string name, uint age)
     {
         if (Deleted)
         {
-            throw new Exception("Cannot update a deleted person.");
+            throw new DomainException.Validation("Cannot update a deleted person.");
         }
 
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new Exception("Name is required.");
-        }
-
-        if (name.Length > 200)
-        {
-            throw new Exception("Name max length is 200.");
-        }
-
-        Name = name;
+        Name = Name.Create(name);
         Age = age;
     }
 
@@ -62,7 +47,7 @@ public sealed class Person
     {
         if (Deleted)
         {
-            throw new Exception("Already deleted.");
+            throw new DomainException.Validation("Already deleted.");
         }
 
         Deleted = true;

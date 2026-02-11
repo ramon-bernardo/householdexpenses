@@ -1,5 +1,5 @@
-﻿using MediatR;
-using AutoMapper;
+﻿using AutoMapper;
+using HouseholdExpenses.Application.Common;
 using HouseholdExpenses.Application.Transactions.DTOs;
 using HouseholdExpenses.Application.Transactions.Queries;
 using HouseholdExpenses.Application.Transactions.Repositories;
@@ -9,7 +9,7 @@ namespace HouseholdExpenses.Application.Transactions.QueryHandlers;
 public sealed class GetTransactionsQueryHandler(
     ITransactionRepository transactionRepository,
     IMapper mapper
-) : IRequestHandler<GetTransactionsQuery, IEnumerable<TransactionDTO>>
+) : ICommandHandler<GetTransactionsQuery, IEnumerable<TransactionDTO>>
 {
     private readonly ITransactionRepository TransactionRepository = transactionRepository;
     private readonly IMapper Mapper = mapper;

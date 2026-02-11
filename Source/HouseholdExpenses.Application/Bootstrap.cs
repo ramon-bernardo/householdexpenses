@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using HouseholdExpenses.Application.Categories;
+using HouseholdExpenses.Application.Common;
 using HouseholdExpenses.Application.People;
 using HouseholdExpenses.Application.Transactions;
 
@@ -20,6 +21,9 @@ public static class Bootstrap
         services.AddMediatR((configuration) =>
         {
             configuration.RegisterServicesFromAssembly(typeof(Bootstrap).Assembly);
+
+            configuration.AddOpenBehavior(typeof(ValidationBehavior<,>));
+            configuration.AddOpenBehavior(typeof(TransactionBehavior<,>));
         });
 
         services.AddValidatorsFromAssembly(typeof(Bootstrap).Assembly);

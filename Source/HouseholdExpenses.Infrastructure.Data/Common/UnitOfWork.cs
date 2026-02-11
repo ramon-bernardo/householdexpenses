@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
+using HouseholdExpenses.Application.Common;
 
 namespace HouseholdExpenses.Infrastructure.Data.Common;
 
@@ -16,8 +17,17 @@ public sealed class UnitOfWork : IUnitOfWork
 
         CurrentTransaction = DbContext.Database.BeginTransaction();
     }
+    public async Task Start(CancellationToken cancellationToken)
+    {
+        if (CurrentTransaction is not null)
+        {
+            return;
+        }
 
-    public async Task Complete(CancellationToken cancellationToken = default)
+        CurrentTransaction = await DbContext.Database.BeginTransactionAsync(cancellationToken);
+    }
+
+    public async Task Complete(CancellationToken cancellationToken)
     {
         if (CurrentTransaction is null)
         {

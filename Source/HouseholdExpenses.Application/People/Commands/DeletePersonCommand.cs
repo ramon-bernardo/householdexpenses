@@ -1,5 +1,8 @@
-﻿using MediatR;
+﻿using HouseholdExpenses.Application.Common;
+using MediatR;
 
 namespace HouseholdExpenses.Application.People.Commands;
 
-public sealed record DeletePersonCommand(uint Id) : IRequest<Unit> { }
+public sealed record DeletePersonCommand(uint Id) :
+    ICommand<Unit>
+{ }

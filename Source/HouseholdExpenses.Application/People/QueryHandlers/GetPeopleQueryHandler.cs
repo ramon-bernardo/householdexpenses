@@ -1,5 +1,5 @@
-﻿using MediatR;
-using AutoMapper;
+﻿using AutoMapper;
+using HouseholdExpenses.Application.Common;
 using HouseholdExpenses.Application.People.DTOs;
 using HouseholdExpenses.Application.People.Queries;
 using HouseholdExpenses.Application.People.Repositories;
@@ -9,7 +9,7 @@ namespace HouseholdExpenses.Application.People.QueryHandlers;
 public sealed class GetPeopleQueryHandler(
     IPersonRepository personRepository,
     IMapper mapper
-) : IRequestHandler<GetPeopleQuery, IEnumerable<PersonDTO>>
+) : ICommandHandler<GetPeopleQuery, IEnumerable<PersonDTO>>
 {
     private readonly IPersonRepository PersonRepository = personRepository;
     private readonly IMapper Mapper = mapper;

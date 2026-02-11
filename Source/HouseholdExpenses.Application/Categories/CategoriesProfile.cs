@@ -9,5 +9,6 @@ public sealed class CategoriesProfile : Profile
     public CategoriesProfile()
     {
         CreateMap<Category, CategoryDTO>();
+        CreateMap<CategoryDTO, Category>();
     }
 }

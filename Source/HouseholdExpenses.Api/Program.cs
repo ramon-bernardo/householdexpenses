@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using HouseholdExpenses.Api.Common.Middlewares;
 using HouseholdExpenses.Application;
 using HouseholdExpenses.Infrastructure.Data;
 
@@ -32,10 +33,10 @@ public class Program
             app.MapOpenApi();
         }
 
+        app.UseMiddleware<ExceptionHandlingMiddleware>();
+
         app.UseHttpsRedirection();
         app.UseAuthorization();
-
-        app.UseUnitOfWork();
 
         app.MapControllers();
         app.MapFallbackToFile("/index.html");

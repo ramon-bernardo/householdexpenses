@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using HouseholdExpenses.Infrastructure.Data.Common;
+using HouseholdExpenses.Application.Common;
 using HouseholdExpenses.Infrastructure.Data.Categories;
+using HouseholdExpenses.Infrastructure.Data.Common;
 using HouseholdExpenses.Infrastructure.Data.People;
 using HouseholdExpenses.Infrastructure.Data.Transactions;
 
@@ -11,11 +11,6 @@ namespace HouseholdExpenses.Infrastructure.Data;
 
 public static class Bootstrap
 {
-    public static IApplicationBuilder UseUnitOfWork(this IApplicationBuilder app)
-    {
-        return app.UseMiddleware<UnitOfWorkMiddleware>();
-    }
-
     public static IServiceCollection AddInfrastructure(
         this IServiceCollection services,
         IConfiguration configuration

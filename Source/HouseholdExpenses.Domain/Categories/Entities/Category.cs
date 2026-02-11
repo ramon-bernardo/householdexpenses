@@ -1,4 +1,5 @@
 ﻿using HouseholdExpenses.Domain.Categories.Enums;
+using HouseholdExpenses.Domain.Common;
 
 namespace HouseholdExpenses.Domain.Categories;
 
@@ -25,12 +26,12 @@ public sealed class Category
     {
         if (string.IsNullOrWhiteSpace(description))
         {
-            throw new Exception("Description is required.");
+            throw new DomainException.Validation("Description is required.");
         }
 
         if (description.Length > 400)
         {
-            throw new Exception("Description max length is 400.");
+            throw new DomainException.Validation("Description max length is 400.");
         }
 
         return new Category(description, purpose);

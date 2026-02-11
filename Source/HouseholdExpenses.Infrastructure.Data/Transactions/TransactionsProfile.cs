@@ -15,18 +15,18 @@ public sealed class TransactionsProfile : Profile
         CreateMap<TransactionTypeModel, TransactionType>();
 
         CreateMap<Transaction, TransactionModel>()
-            .ForMember(model => model.CategoryId, opt => opt.MapFrom(transaction => transaction.Category.Id))
-            .ForMember(model => model.PersonId, opt => opt.MapFrom(transaction => transaction.Person.Id));
+            .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => src.Category.Id))
+            .ForMember(dest => dest.PersonId, opt => opt.MapFrom(src => src.Person.Id));
 
         CreateMap<TransactionModel, Transaction>()
-            .ConstructUsing((model, context) =>
+            .ConstructUsing((src, context) =>
             {
-                var type = context.Mapper.Map<TransactionType>(model.Type);
-                var category = context.Mapper.Map<Category>(model.Category);
-                var person = context.Mapper.Map<Person>(model.Person);
+                var type = context.Mapper.Map<TransactionType>(src.Type);
+                var category = context.Mapper.Map<Category>(src.Category);
+                var person = context.Mapper.Map<Person>(src.Person);
                 return Transaction.Create(
-                    model.Description, 
-                    model.Amount,
+                    src.Description,
+                    src.Amount,
                     type,
                     category,
                     person

@@ -1,12 +1,14 @@
 ﻿using MediatR;
+using HouseholdExpenses.Application.Common;
 using HouseholdExpenses.Application.People.Commands;
 using HouseholdExpenses.Application.People.Repositories;
+using HouseholdExpenses.Domain.Common;
 
 namespace HouseholdExpenses.Application.People.CommandHandlers;
 
 public sealed class DeletePersonCommandHandler(
     IPersonRepository personRepository
-) : IRequestHandler<DeletePersonCommand, Unit>
+) : ICommandHandler<DeletePersonCommand, Unit>
 {
     private readonly IPersonRepository PersonRepository = personRepository;
 
@@ -15,7 +17,7 @@ public sealed class DeletePersonCommandHandler(
         var person = await PersonRepository.GetActiveById(request.Id);
         if (person is null)
         {
-            throw new Exception("Person not found."); // NotFoundException
+            throw new DomainException.NotFound("Person not found.");
         }
 
         person.Delete();

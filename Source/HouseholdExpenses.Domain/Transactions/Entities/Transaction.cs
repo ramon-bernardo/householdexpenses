@@ -1,5 +1,6 @@
 ﻿using HouseholdExpenses.Domain.Categories;
 using HouseholdExpenses.Domain.Categories.Enums;
+using HouseholdExpenses.Domain.Common;
 using HouseholdExpenses.Domain.People.Entities;
 using HouseholdExpenses.Domain.Transactions.Enums;
 
@@ -39,17 +40,17 @@ public sealed class Transaction
     {
         if (string.IsNullOrWhiteSpace(description))
         {
-            throw new Exception("Description is required."); // DomainException
+            throw new DomainException.Validation("Description is required.");
         }
 
         if (description.Length > 400)
         {
-            throw new Exception("Description max length is 400.");
+            throw new DomainException.Validation("Description max length is 400.");
         }
 
         if (amount <= 0)
         {
-            throw new Exception("Amount must be a positive value.");
+            throw new DomainException.Validation("Amount must be a positive value.");
         }
 
         switch (category.Purpose)
@@ -57,19 +58,19 @@ public sealed class Transaction
             case CategoryPurpose.Expense:
                 if (person.Age < 18)
                 {
-                    throw new Exception("Minor aged people can only have expense transactions.");
+                    throw new DomainException.Validation("Minor aged people can only have expense transactions.");
                 }
 
                 if (type == TransactionType.Income)
                 {
-                    throw new Exception("The selected category is restricted to expenses only.");
+                    throw new DomainException.Validation("The selected category is restricted to expenses only.");
                 }
                 break;
 
             case CategoryPurpose.Income:
                 if (type == TransactionType.Expense)
                 {
-                    throw new Exception("The selected category is restricted to income only.");
+                    throw new DomainException.Validation("The selected category is restricted to income only.");
                 }
                 break;
         }
@@ -81,7 +82,7 @@ public sealed class Transaction
     {
         if (Deleted)
         {
-            throw new Exception("Already deleted.");
+            throw new DomainException.Validation("Already deleted.");
         }
 
         Deleted = true;

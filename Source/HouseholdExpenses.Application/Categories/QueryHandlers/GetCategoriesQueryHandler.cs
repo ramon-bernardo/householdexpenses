@@ -1,15 +1,15 @@
-﻿using MediatR;
-using AutoMapper;
+﻿using AutoMapper;
 using HouseholdExpenses.Application.Categories.DTOs;
 using HouseholdExpenses.Application.Categories.Queries;
 using HouseholdExpenses.Application.Categories.Repositories;
+using HouseholdExpenses.Application.Common;
 
 namespace HouseholdExpenses.Application.Categories.QueryHandlers;
 
 public sealed class GetCategoriesQueryHandler(
     ICategoryRepository categoryRepository,
     IMapper mapper
-) : IRequestHandler<GetCategoriesQuery, IEnumerable<CategoryDTO>>
+) : ICommandHandler<GetCategoriesQuery, IEnumerable<CategoryDTO>>
 {
     private readonly ICategoryRepository CategoryRepository = categoryRepository;
     private readonly IMapper Mapper = mapper;

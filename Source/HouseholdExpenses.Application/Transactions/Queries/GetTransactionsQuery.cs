@@ -1,6 +1,8 @@
-﻿using MediatR;
+﻿using HouseholdExpenses.Application.Common;
 using HouseholdExpenses.Application.Transactions.DTOs;
 
 namespace HouseholdExpenses.Application.Transactions.Queries;
 
-public sealed record GetTransactionsQuery : IRequest<IEnumerable<TransactionDTO>> { }
+public sealed record GetTransactionsQuery :
+    ICommand<IEnumerable<TransactionDTO>>
+{ }
