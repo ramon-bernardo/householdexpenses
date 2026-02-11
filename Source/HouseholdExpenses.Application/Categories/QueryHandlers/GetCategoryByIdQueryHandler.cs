@@ -2,6 +2,7 @@
 using AutoMapper;
 using HouseholdExpenses.Application.Categories.DTOs;
 using HouseholdExpenses.Application.Categories.Repositories;
+using HouseholdExpenses.Application.Categories.Queries;
 
 namespace HouseholdExpenses.Application.Categories.QueryHandlers;
 
