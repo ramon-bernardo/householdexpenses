@@ -11,13 +11,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="14.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.SpaProxy">
-      <Version>10.*-*</Version>
+    <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="10.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HouseholdExpenses.Application\HouseholdExpenses.Application.csproj" />
+    <ProjectReference Include="..\HouseholdExpenses.Infrastructure.CrossCutting.IoC\HouseholdExpenses.Infrastructure.CrossCutting.IoC.csproj" />
+    <ProjectReference Include="..\HouseholdExpenses.Infrastructure.Data\HouseholdExpenses.Infrastructure.Data.csproj" />
     <ProjectReference Include="..\HouseholdExpenses.Presentation\householdexpenses-web\householdexpenses-web.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>

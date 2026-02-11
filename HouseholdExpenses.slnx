@@ -18,10 +18,10 @@
     </Project>
   </Folder>
   <Folder Name="/Infrastructure/">
-    <Project Path="Source/HouseholdExpenses.Infrastructure/HouseholdExpenses.CrossCutting.IoC/HouseholdExpenses.CrossCutting.IoC.csproj" Id="0ec76599-8c87-4409-ac7b-b70f11226898">
+    <Project Path="Source/HouseholdExpenses.Infrastructure.CrossCutting.IoC/HouseholdExpenses.Infrastructure.CrossCutting.IoC.csproj">
       <Platform Project="x64" />
     </Project>
-    <Project Path="Source/HouseholdExpenses.Infrastructure/HouseholdExpenses.Data/HouseholdExpenses.Data.csproj" Id="db941456-2ea8-4168-a91e-24d29f001145">
+    <Project Path="Source/HouseholdExpenses.Infrastructure.Data/HouseholdExpenses.Infrastructure.Data.csproj">
       <Platform Project="x64" />
     </Project>
   </Folder>

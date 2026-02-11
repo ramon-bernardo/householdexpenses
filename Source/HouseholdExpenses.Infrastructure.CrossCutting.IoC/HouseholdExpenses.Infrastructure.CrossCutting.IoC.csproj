@@ -7,4 +7,8 @@
     <Platforms>x64</Platforms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HouseholdExpenses.Application\HouseholdExpenses.Application.csproj" />
+  </ItemGroup>
+
 </Project>
