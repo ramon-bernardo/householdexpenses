@@ -9,7 +9,7 @@ public sealed class Transaction
 {
     public uint Id { get; private set; }
 
-    public string Description { get; private set; } = string.Empty;
+    public string Description { get; private set; }
 
     public decimal Amount { get; private set; }
 
@@ -21,7 +21,10 @@ public sealed class Transaction
 
     public bool Deleted { get; private set; }
 
-    public Transaction() { }
+#pragma warning disable CS8618
+    // Required for Entity Framework Core materialization
+    private Transaction() { }
+#pragma warning restore CS8618
 
     private Transaction(string description, decimal amount, TransactionType type, Category category, Person person)
     {

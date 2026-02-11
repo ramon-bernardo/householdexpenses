@@ -6,11 +6,14 @@ public sealed class Category
 {
     public uint Id { get; private set; }
 
-    public string Description { get; private set; } = string.Empty;
+    public string Description { get; private set; }
 
     public CategoryPurpose Purpose { get; private set; }
 
+#pragma warning disable CS8618
+    // Required for Entity Framework Core materialization
     private Category() { }
+#pragma warning restore CS8618
 
     private Category(string description, CategoryPurpose purpose)
     {

@@ -4,13 +4,16 @@ public sealed class Person
 {
     public uint Id { get; private set; }
 
-    public string Name { get; private set; } = string.Empty;
+    public string Name { get; private set; }
 
     public uint Age { get; private set; }
 
     public bool Deleted { get; private set; }
 
+#pragma warning disable CS8618
+    // Required for Entity Framework Core materialization
     private Person() { }
+#pragma warning restore CS8618
 
     private Person(string name, uint age)
     {
