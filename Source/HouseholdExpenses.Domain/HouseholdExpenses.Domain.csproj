@@ -11,6 +11,7 @@
     <Folder Include="Categories\ValueObjects\" />
     <Folder Include="People\Enums\" />
     <Folder Include="People\ValueObjects\" />
+    <Folder Include="Transactions\ValueObjects\" />
   </ItemGroup>
 
 </Project>

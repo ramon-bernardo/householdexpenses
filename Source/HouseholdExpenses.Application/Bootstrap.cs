@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using HouseholdExpenses.Application.Categories;
 using HouseholdExpenses.Application.People;
+using HouseholdExpenses.Application.Transactions;
 
 namespace HouseholdExpenses.Application;
 
@@ -13,6 +14,7 @@ public static class Bootstrap
         {
             configuration.AddProfile<CategoriesProfile>();
             configuration.AddProfile<PeopleProfile>();
+            configuration.AddProfile<TransactionsProfile>();
         });
 
         services.AddMediatR((configuration) =>

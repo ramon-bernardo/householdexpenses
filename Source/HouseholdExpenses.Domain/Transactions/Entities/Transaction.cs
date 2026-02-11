@@ -1,0 +1,86 @@
+﻿using HouseholdExpenses.Domain.Categories;
+using HouseholdExpenses.Domain.Categories.Enums;
+using HouseholdExpenses.Domain.People.Entities;
+using HouseholdExpenses.Domain.Transactions.Enums;
+
+namespace HouseholdExpenses.Domain.Transactions.Entities;
+
+public sealed class Transaction
+{
+    public uint Id { get; private set; }
+
+    public string Description { get; private set; } = string.Empty;
+
+    public decimal Amount { get; private set; }
+
+    public TransactionType Type { get; private set; }
+
+    public Category Category { get; private set; }
+
+    public Person Person { get; private set; }
+
+    public bool Deleted { get; private set; }
+
+    public Transaction() { }
+
+    private Transaction(string description, decimal amount, TransactionType type, Category category, Person person)
+    {
+        Description = description;
+        Amount = amount;
+        Type = type;
+        Category = category;
+        Person = person;
+    }
+
+    public static Transaction Create(string description, decimal amount, TransactionType type, Category category, Person person)
+    {
+        if (string.IsNullOrWhiteSpace(description))
+        {
+            throw new Exception("Description is required."); // DomainException
+        }
+
+        if (description.Length > 400)
+        {
+            throw new Exception("Description max length is 400.");
+        }
+
+        if (amount <= 0)
+        {
+            throw new Exception("Amount must be a positive value.");
+        }
+
+        switch (category.Purpose)
+        {
+            case CategoryPurpose.Expense:
+                if (person.Age < 18)
+                {
+                    throw new Exception("Minor aged people can only have expense transactions.");
+                }
+
+                if (type == TransactionType.Income)
+                {
+                    throw new Exception("The selected category is restricted to expenses only.");
+                }
+                break;
+
+            case CategoryPurpose.Income:
+                if (type == TransactionType.Expense)
+                {
+                    throw new Exception("The selected category is restricted to income only.");
+                }
+                break;
+        }
+
+        return new Transaction(description, amount, type, category, person);
+    }
+
+    public void Delete()
+    {
+        if (Deleted)
+        {
+            throw new Exception("Already deleted.");
+        }
+
+        Deleted = true;
+    }
+}

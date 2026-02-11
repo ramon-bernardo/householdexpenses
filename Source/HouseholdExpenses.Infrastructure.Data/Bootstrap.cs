@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using HouseholdExpenses.Infrastructure.Data.Common;
 using HouseholdExpenses.Infrastructure.Data.Categories;
 using HouseholdExpenses.Infrastructure.Data.People;
+using HouseholdExpenses.Infrastructure.Data.Transactions;
 
 namespace HouseholdExpenses.Infrastructure.Data;
 
@@ -40,7 +41,8 @@ public static class Bootstrap
 
         services
             .AddCategoriesInfrastructure()
-            .AddPeopleInfrastructure();
+            .AddPeopleInfrastructure()
+            .AddTransactionsInfrastructure();
 
         return services;
     }
