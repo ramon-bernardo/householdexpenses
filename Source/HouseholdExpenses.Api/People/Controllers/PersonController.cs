@@ -44,6 +44,10 @@ public sealed class PersonController(ISender sender) : Controller
     public async Task<IActionResult> GetById(uint id)
     {
         var person = await Sender.Send(new GetPersonByIdQuery(id));
+        if (person is null)
+        {
+            return NotFound();
+        }
         return Ok(person);
     }
 }

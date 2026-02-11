@@ -30,6 +30,10 @@ public sealed class CategoryController(ISender sender) : Controller
     public async Task<IActionResult> GetById(uint id)
     {
         var category = await Sender.Send(new GetCategoryByIdQuery(id));
+        if (category is null)
+        {
+            return NotFound();
+        }
         return Ok(category);
     }
 }
