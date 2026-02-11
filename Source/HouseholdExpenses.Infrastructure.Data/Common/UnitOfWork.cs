@@ -3,20 +3,14 @@ using HouseholdExpenses.Application.Common;
 
 namespace HouseholdExpenses.Infrastructure.Data.Common;
 
-public sealed class UnitOfWork : IUnitOfWork
+public sealed class UnitOfWork(SqliteDbContext dbContext) : IUnitOfWork
 {
-    private readonly SqliteDbContext DbContext;
+    private readonly SqliteDbContext DbContext = dbContext;
 
     private IDbContextTransaction? CurrentTransaction;
 
     private bool Disposed;
 
-    public UnitOfWork(SqliteDbContext dbContext)
-    {
-        DbContext = dbContext;
-
-        CurrentTransaction = DbContext.Database.BeginTransaction();
-    }
     public async Task Start(CancellationToken cancellationToken)
     {
         if (CurrentTransaction is not null)
